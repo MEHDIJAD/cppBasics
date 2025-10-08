@@ -8,12 +8,12 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
     while (true)
     {
         std::cout << "Usage: <ADD>, <SEARCH> OR <EXIT>: "; 
-        std::cin >> input;
+         std::getline(std::cin >> std::ws, input);
         if (input == "ADD"){
             p.AddContact();
         }
         else if (input == "SEARCH"){
-            // Display all contact 
+            p.DisplayContacts();
         }
         else if (input == "EXIT"){
             break ;
