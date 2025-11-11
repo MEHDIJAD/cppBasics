@@ -1,4 +1,34 @@
-#include "header.h"
+#include "Contact.hpp"
+#include <iostream> 
+#include <cctype>
+
+/* 1. Default Constructor */
+Contact::Contact(){
+
+}
+
+/* 2. Copy Constructor */
+Contact::Contact(const Contact& other) {
+    *this = other;
+}
+
+/* 3. Copy Assignment Operator */
+Contact& Contact::operator=(const Contact& other) {
+    if (this != &other)
+    {
+        this->_FirstName = other._FirstName;
+        this->_LastName = other._LastName;
+        this->_Nickname = other._Nickname;
+        this->_PhoneNumber = other._PhoneNumber;
+        this->_DarkestSecret = other._DarkestSecret;
+    }
+    return *this;
+}
+
+Contact::~Contact() {
+    // This can be empty
+}
+
 
 bool Contact::SetFirstName(std::string FirstName)
 {
@@ -54,8 +84,8 @@ std::string Contact::LastName(){
     return (_LastName);
 }
 
-void Contact::SetNickname(std::string Nickname){
-    _Nickname = Nickname;
+bool Contact::SetNickname(std::string Nickname){
+    return (_Nickname = Nickname, true);
 }
 
 std::string Contact::Nickname(){
@@ -82,8 +112,9 @@ std::string Contact::PhoneNumber(){
     return (_PhoneNumber);
 }
 
-void Contact::SetDarkestSecret(std::string DarkestSecret) {
+bool Contact::SetDarkestSecret(std::string DarkestSecret) {
      _DarkestSecret = DarkestSecret;
+     return (true);
 }
 
 std::string Contact::DarkestSecret() {

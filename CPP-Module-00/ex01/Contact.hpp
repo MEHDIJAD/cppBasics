@@ -1,4 +1,7 @@
-#include "header.h"
+# ifndef CONTACT_HPP
+# define CONTACT_HPP
+
+#include <string>
 
 class Contact
 {
@@ -10,12 +13,23 @@ class Contact
         std::string _DarkestSecret;
 
     public:
-        // Setters
+        /* 1. Default Constructor */
+        Contact();
+        
+        /* 2. Copy Constructor */
+        Contact(const Contact& other);
+
+        /* 3. Copy Assignment Operator */
+        Contact& operator=(const Contact& other);
+
+        /* 4. Destructor */
+         ~Contact();
+
         bool SetFirstName(std::string FirstName);
         bool SetLastName(std::string LastName);
-        void SetNickname(std::string Nickname);
+        bool SetNickname(std::string Nickname);
         bool SetPhoneNumber(std::string PhoneNumber);
-        void SetDarkestSecret(std::string DarkestSecret);
+        bool SetDarkestSecret(std::string DarkestSecret);
 
         // Getters
         std::string FirstName();
@@ -24,3 +38,5 @@ class Contact
         std::string PhoneNumber();
         std::string DarkestSecret();
 };
+
+#endif

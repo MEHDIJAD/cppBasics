@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cctype>
 
 int main(int ac __attribute__((unused)), char *av[])
 {
@@ -15,7 +16,9 @@ int main(int ac __attribute__((unused)), char *av[])
 			while (av[i][++j])
 			{
 				char c = av[i][j];
-				c = std::toupper(c);
+				if (std::isalpha(c)){
+					c = std::toupper(c);
+				}
 				std::cout << c;
 			}
 		}

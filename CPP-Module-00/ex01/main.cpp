@@ -1,4 +1,6 @@
-#include "header.h"
+#include "PhoneBook.hpp"
+#include <iostream>
+#include <sstream>
 
 int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
 {
@@ -6,23 +8,23 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
     PhoneBook PhBook;
     int index;
     
-
-    // std::getline returns the stream, which evaluates to `true` on success
-    // and `false` on failure (like Ctrl+D), autom`atically breaking the loop.
-    
-    while (std::cout << "\e[36m🗒️ ~ \e[0m"
+    while (std::cout << "\e[36m🕮  \e[0m"
         && std::getline(std::cin, input))
     {
-        // `find_first_not_of(" \t\n\r")` checks if there are any non-whitespace characters.
-        // `std::string::npos` means "not found".
-        if (input.find_first_not_of(" \t\n\r") == std::string::npos){
-            // If the line was empty or just spaces, just loop again.
+        size_t start = input.find_first_not_of(" \t\n\r");
+        /* this evaluat to if i go thgout the howle input nd not find
+            " \t\n\r" return npos -> (npos == npos) true  
+        */
+        if (start == std::string::npos){
             continue;
         }
-        else if (input == "ADD"){
+        size_t end = input.find_last_not_of(" \t\n\r");
+        input = input.substr(start, end - start + 1);
+        if (input == "ADD"){
             PhBook.AddContact();
         }
-        else if (input == "SEARCH"){
+        else if (input == "SEARCH")
+        {
             PhBook.DisplayContacts();
             if (PhBook.getNumContact() > 0)
             {
@@ -53,7 +55,7 @@ int main(int ac __attribute__((unused)), char **av __attribute__((unused)))
             break ;
         }
         else {
-            std::cout << "\e[31mUsage: <ADD>, <SEARCH> OR <EXIT>\e[0m" 
+            std::cout << "\e[31m<ADD> <SEARCH> <EXIT>\e[0m" 
             << std::endl;
         }
     }

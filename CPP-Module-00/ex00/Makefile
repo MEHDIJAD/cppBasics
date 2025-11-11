@@ -10,7 +10,7 @@ NAME = megaphone
 # Configuration variables. Store compiler path and compilation flags.
 Compiler = c++
 FLAGS = -Wall -Wextra -Werror
-PlusFLAG = -std=c++98
+PLUSFLAG = -std=c++98
 
 # Target declaration. When you type make, it builds this (default first target). 
 # Depends on $(NAME), so Make will build that first.
