@@ -36,7 +36,8 @@ public:
 	/*! @brief Gets the total number of withdrawals made across all accounts. */
 	static int	getNbWithdrawals( void );
 
-	/*! @brief Displays summary information for all accounts. */
+	/*! @brief Displays summary information for all accounts (total acc/$, dep, with).
+	*/
 	static void	displayAccountsInfos( void );
 
 	/*! @brief Constructs a new Account object with an initial deposit. */
@@ -53,7 +54,8 @@ public:
 	/*! @brief Returns the current balance of the account. */
 	int		checkAmount( void ) const;
 
-	/*! @brief Displays the current status of this account. */
+	/*! @brief Displays the current status of this account 
+	   in a [index, amount, dep, with] format. */
 	void	displayStatus( void ) const;
 
 

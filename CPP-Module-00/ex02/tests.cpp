@@ -15,9 +15,14 @@
 
 int		main( void ) {
 
-	typedef std::vector<Account::t>							  accounts_t;
-	typedef std::vector<int>								  ints_t;
-	typedef std::pair<accounts_t::iterator, ints_t::iterator> acc_int_t;
+	/*! @brief Alias for a vector of Account object
+	s. */
+	typedef std::vector<Account::t>	accounts_t;
+	/*! @brief Alias for a vector of integers. */
+	typedef std::vector<int>	ints_t;
+
+	/*! @brief Alias for a pair of iterators, one for accounts_t and one for ints_t. */
+	typedef std::pair<accounts_t::iterator, ints_t::iterator>  acc_int_t;
 
 	/*!
 	 * @brief an array of initial deposits to create some accounts.
@@ -41,6 +46,7 @@ int		main( void ) {
 	 * - The 'first' pointer is `amounts`, which points to the start of the array data.
 	 * - The 'last' pointer is `amounts + amounts_size`, which points to the memory
 	 *   address immediately after the final element of the array.
+	 *! and this will init constructor of Accounts
 	 */
 	accounts_t				accounts( amounts, amounts + amounts_size );
 
@@ -81,29 +87,31 @@ int		main( void ) {
 	ints_t::iterator	wit_end		= withdrawals.end();
 	
 
-	/*! @brief  */
-	Account::displayAccountsInfos();
-	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
+// 	Account::displayAccountsInfos();
 
-	for ( acc_int_t it( acc_begin, dep_begin );
-		  it.first != acc_end && it.second != dep_end;
-		  ++(it.first), ++(it.second) ) {
+// 	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
 
-		(*(it.first)).makeDeposit( *(it.second) );
-	}
+// 	for ( acc_int_t it( acc_begin, dep_begin );
+// 		  it.first != acc_end && it.second != dep_end;
+// 		  ++(it.first), ++(it.second) ) {
 
-	Account::displayAccountsInfos();
-	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
+// 		(*(it.first)).makeDeposit( *(it.second) );
+// 	}
 
-	for ( acc_int_t it( acc_begin, wit_begin );
-		  it.first != acc_end && it.second != wit_end;
-		  ++(it.first), ++(it.second) ) {
+// 	Account::displayAccountsInfos();
 
-		(*(it.first)).makeWithdrawal( *(it.second) );
-	}
+// 	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
 
-	Account::displayAccountsInfos();
-	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
+// 	for ( acc_int_t it( acc_begin, wit_begin );
+// 		  it.first != acc_end && it.second != wit_end;
+// 		  ++(it.first), ++(it.second) ) {
+
+// 		(*(it.first)).makeWithdrawal( *(it.second) );
+// 	}
+
+// 	Account::displayAccountsInfos();
+	
+// 	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
 
 	return 0;
 }
