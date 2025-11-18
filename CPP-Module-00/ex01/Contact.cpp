@@ -31,27 +31,20 @@ Contact& Contact::operator=(const Contact& other) {
 }
 
 inline bool isValid(char c){
-    return ((isalpha(c) || c == '-' || c == '_' ) && isprint(c));
+    return ((isalpha(c) || c == '-' || c == '_'  || c == ' ') && isprint(c));
 }
 
 bool Contact::SetFirstName(std::string FirstName)
 {
-    try
-    {
-        size_t i = -1;
-        while (++i < FirstName.length()) {
-            if (!isValid(FirstName[i])){
-                throw std::invalid_argument("\e[31mInvalid First Name\e[0m");
-            }
+    size_t i = -1;
+    while (++i < FirstName.length()) {
+        if (!isValid(FirstName[i])){
+            std::cerr << "\e[31mInvalid First Name\e[0m" << std::endl;
+            return (false);
         }
-        _FirstName = FirstName;
-        return (true);
     }
-    catch (const std::invalid_argument &e)
-    {
-        std::cerr << e.what() << std::endl;
-        return (false);
-    }   
+    _FirstName = FirstName;
+    return (true);
 }
 
 std::string Contact::FirstName() {
@@ -61,24 +54,15 @@ std::string Contact::FirstName() {
 
 bool Contact::SetLastName(std::string LastName)
 {
-    try
-    {
-        size_t i = -1;
-        while (++i < LastName.length()) {
+    size_t i = -1;
+    while (++i < LastName.length()) {
         if (!isValid(LastName[i])){
-            throw std::invalid_argument("\e[31mInvalid Last Name\e[0m");
-            // ❗ Stop execution here and jump to catch if input is invalid
-                return (false);
-            }
+            std::cerr << "\e[31mInvalid Last Name\e[0m" << std::endl;
+            return (false);
         }
-            _LastName = LastName;
-            return (true);
     }
-    catch (const std::invalid_argument &e)
-    {
-        std::cerr << e.what() << std::endl;
-        return (false);
-    }   
+    _LastName = LastName;
+    return (true);
 }
 
 std::string Contact::LastName(){
@@ -101,7 +85,7 @@ bool Contact::SetPhoneNumber(std::string PhoneNumber) {
     {
         current_char = PhoneNumber[index];
         if(!isdigit(current_char)){
-            std::cout << "\e[31mInvalid phone number (0-9) \e[0m\n";
+            std::cout << "\e[31mInvalid Phone Number (0-9) \e[0m\n";
             return (false);
         }
     }
