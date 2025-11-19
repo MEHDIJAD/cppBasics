@@ -1,38 +1,25 @@
-# C++ Project: Zombie
+# Project Overview
 
-## Project Overview
+This is a simple C++ project from the `cpp01` module. It introduces the concept of classes and objects in C++ by creating a `Zombie` class. The `main` function demonstrates creating zombies on the stack and heap.
 
-This directory contains a C++ exercise that involves implementing a `Zombie` class. The goal is to create a `Zombie` class and functions to create and manage zombie objects.
+# Building and Running
 
-## Building and Running
+The project uses a `Makefile` for building.
 
-The `Makefile` in the `ex00` directory is currently empty. To build and run this project, you will need to write a `Makefile` that compiles the C++ source files (`.cpp`) into an executable.
+*   `make`: Compiles the project.
+*   `make clean`: Removes object files.
+*   `make fclean`: Removes object files and the executable.
+*   `make re`: Rebuilds the project.
+*   `make run`: Compiles and runs the executable.
 
-A typical `Makefile` for this project might look like this:
-
-```makefile
-NAME = zombie
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
-SRCS = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
-OBJS = $(SRCS:.cpp=.o)
-
-all: $(NAME)
-
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
-
-clean:
-	rm -f $(OBJS)
-
-fclean: clean
-	rm -f $(NAME)
-
-re: fclean all
+To run the compiled program:
+```bash
+cd ex00
+./Zombie
 ```
 
-Once you have a `Makefile`, you can build the project by running `make` in the `ex00` directory.
+# Development Conventions
 
-## Development Conventions
-
-The header file `Zombie.hpp` defines the `Zombie` class. You will need to implement the methods of this class in `Zombie.cpp`. The other `.cpp` files (`newZombie.cpp`, `randomChump.cpp`, and `main.cpp`) likely contain other functions that you need to implement.
+*   The code is written in C++98.
+*   The header file `Zombie.hpp` uses `#pragma once` and include guards.
+*   The `Zombie` class has a constructor and a destructor.
