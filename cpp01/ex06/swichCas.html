@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic C++ Switch Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom Animations and Styles */
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+        .connector-line {
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .flow-node {
+            transition: all 0.3s ease;
+            border: 2px solid #334155;
+            opacity: 0.6;
+        }
+
+        .flow-node.active {
+            border-color: #22c55e; /* Green-500 */
+            background-color: #14532d; /* Green-900 */
+            color: #fff;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.5);
+            opacity: 1;
+            transform: scale(1.05);
+            z-index: 50;
+        }
+
+        .flow-node.active-check {
+            border-color: #eab308; /* Yellow-500 */
+            background-color: #422006; /* Yellow-950 */
+            box-shadow: 0 0 15px rgba(234, 179, 8, 0.5);
+            opacity: 1;
+            z-index: 50;
+        }
+
+        .code-line {
+            transition: background-color 0.2s;
+            padding: 2px 8px;
+            border-radius: 4px;
+            white-space: pre;
+        }
+        .code-line.highlight {
+            background-color: #1e293b;
+            border-left: 3px solid #22c55e;
+            color: #4ade80;
+        }
+
+        .v-line { width: 2px; background-color: #334155; margin: 0 auto; }
+        
+        .active-path { background-color: #22c55e !important; border-color: #22c55e !important; }
+        .active-path-check { background-color: #eab308 !important; border-color: #eab308 !important; }
+
+        /* Diamond Shape Helper */
+        .diamond-shape {
+            transform: rotate(45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .diamond-content {
+            transform: rotate(-45deg);
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col p-4 overflow-hidden">
+
+    <!-- Controls Header -->
+    <div class="w-full max-w-7xl mx-auto mb-4 bg-slate-800 p-4 rounded-lg shadow-lg z-10 flex flex-col gap-4">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-xl font-bold text-white">Dynamic Switch Builder</h1>
+                <p class="text-sm text-slate-400">Add cases, customize logic, and visualize the flow.</p>
+            </div>
+            
+            <!-- Simulation Controls -->
+            <div class="flex items-center gap-2 bg-slate-900 p-2 rounded border border-slate-700">
+                <span class="text-sm text-slate-400">Simulate Input:</span>
+                <input type="number" id="simInputValue" value="1" class="bg-slate-700 border border-slate-600 text-white p-1 rounded w-16 text-center focus:outline-none focus:border-blue-500">
+                <button onclick="runSimulation()" class="bg-green-600 hover:bg-green-500 text-white px-4 py-1 rounded font-bold transition text-sm">Run</button>
+            </div>
+        </div>
+
+        <!-- Editor Controls -->
+        <div class="flex flex-wrap gap-2 border-t border-slate-700 pt-4">
+            <button onclick="addCase()" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1 rounded text-sm flex items-center gap-1">
+                <span>+</span> Add Case
+            </button>
+            <button onclick="resetCases()" class="bg-red-900 hover:bg-red-800 text-red-200 px-3 py-1 rounded text-sm">
+                Reset Default
+            </button>
+            <div class="flex-1"></div>
+            <div class="text-xs text-slate-500 flex items-center">
+                *Modifying cases auto-updates the code & flow
+            </div>
+        </div>
+        
+        <!-- Case List Editor -->
+        <div id="case-editor-list" class="flex flex-wrap gap-2 max-h-32 overflow-y-auto">
+            <!-- Injected via JS -->
+        </div>
+    </div>
+
+    <!-- Main Split View -->
+    <div class="flex-1 flex flex-col md:flex-row gap-4 max-w-7xl mx-auto w-full h-full overflow-hidden">
+        
+        <!-- Left Panel: Generated C++ Code -->
+        <div class="w-full md:w-1/3 bg-slate-900 rounded-lg border border-slate-700 shadow-xl flex flex-col">
+            <div class="bg-slate-950 px-4 py-2 text-xs text-slate-400 font-mono border-b border-slate-800">generated_code.cpp</div>
+            <div id="code-container" class="p-6 font-mono text-sm overflow-y-auto flex-1 text-slate-300">
+                <!-- Code injected here -->
+            </div>
+        </div>
+
+        <!-- Right Panel: Visual Flowchart -->
+        <div class="w-full md:w-2/3 bg-slate-800 rounded-lg border border-slate-700 p-4 relative flex flex-col items-center overflow-y-auto" id="visual-container">
+            <!-- Visual nodes injected here -->
+        </div>
+    </div>
+
+    <script>
+        // --- STATE MANAGEMENT ---
+        let appState = {
+            cases: [
+                { val: 1, output: "Hello" },
+                { val: 2, output: "World" },
+                { val: 3, output: "C++" }
+            ],
+            defaultOutput: "Unknown"
+        };
+
+        // --- RENDER LOGIC ---
+
+        function init() {
+            renderEditor();
+            render();
+        }
+
+        function addCase() {
+            const nextVal = appState.cases.length > 0 ? appState.cases[appState.cases.length-1].val + 1 : 1;
+            appState.cases.push({ val: nextVal, output: "Action " + nextVal });
+            renderEditor();
+            render();
+        }
+
+        function removeCase(index) {
+            appState.cases.splice(index, 1);
+            renderEditor();
+            render();
+        }
+
+        function updateCase(index, key, value) {
+            if (key === 'val') value = parseInt(value);
+            appState.cases[index][key] = value;
+            render(); // Re-render visual/code immediately
+        }
+
+        function updateDefault(val) {
+            appState.defaultOutput = val;
+            render();
+        }
+
+        function resetCases() {
+            appState.cases = [
+                { val: 1, output: "One" },
+                { val: 2, output: "Two" }
+            ];
+            appState.defaultOutput = "Other";
+            renderEditor();
+            render();
+        }
+
+        // Renders the little inputs at the top
+        function renderEditor() {
+            const list = document.getElementById('case-editor-list');
+            list.innerHTML = '';
+
+            appState.cases.forEach((c, i) => {
+                const div = document.createElement('div');
+                div.className = "flex items-center gap-1 bg-slate-700 p-1 rounded border border-slate-600";
+                div.innerHTML = `
+                    <span class="text-xs text-orange-400 font-mono">case</span>
+                    <input type="number" value="${c.val}" oninput="updateCase(${i}, 'val', this.value)" class="w-10 bg-slate-900 text-white text-xs p-1 rounded border border-slate-600">
+                    <span class="text-xs text-slate-400">:</span>
+                    <input type="text" value="${c.output}" oninput="updateCase(${i}, 'output', this.value)" class="w-20 bg-slate-900 text-green-400 text-xs p-1 rounded border border-slate-600">
+                    <button onclick="removeCase(${i})" class="text-red-400 hover:text-red-200 px-1 text-xs">×</button>
+                `;
+                list.appendChild(div);
+            });
+
+            // Default case editor
+            const defDiv = document.createElement('div');
+            defDiv.className = "flex items-center gap-1 bg-slate-700 p-1 rounded border border-slate-600 ml-2";
+            defDiv.innerHTML = `
+                <span class="text-xs text-purple-400 font-mono">default</span>
+                <span class="text-xs text-slate-400">:</span>
+                <input type="text" value="${appState.defaultOutput}" oninput="updateDefault(this.value)" class="w-24 bg-slate-900 text-green-400 text-xs p-1 rounded border border-slate-600">
+            `;
+            list.appendChild(defDiv);
+        }
+
+        // Main Render Function for Code & Diagram
+        function render() {
+            const codeContainer = document.getElementById('code-container');
+            const visualContainer = document.getElementById('visual-container');
+
+            // 1. Build C++ Code String HTML
+            let codeHtml = '';
+            codeHtml += `<div id="code-start" class="code-line mb-2 text-slate-500">// Input variable x</div>`;
+            codeHtml += `<div id="code-switch" class="code-line">switch (x) {</div>`;
+            
+            appState.cases.forEach((c, i) => {
+                codeHtml += `
+                <div id="code-case-${i}" class="code-line ml-4 mt-2">case ${c.val}:</div>
+                <div id="code-block-${i}" class="code-line ml-8 text-blue-300">std::cout << "${c.output}";</div>
+                <div id="code-break-${i}" class="code-line ml-8 text-pink-400">break;</div>`;
+            });
+
+            codeHtml += `
+                <div id="code-default" class="code-line ml-4 mt-2">default:</div>
+                <div id="code-block-def" class="code-line ml-8 text-blue-300">std::cout << "${appState.defaultOutput}";</div>
+                <div id="code-break-def" class="code-line ml-8 text-pink-400">break;</div>
+                <div id="code-end" class="code-line">}</div>`;
+
+            codeContainer.innerHTML = codeHtml;
+
+            // 2. Build Visual Flowchart
+            let visualHtml = '';
+            
+            // Start Node
+            visualHtml += `<div id="node-start" class="flow-node bg-slate-700 p-2 rounded-full w-24 text-center font-bold text-sm mb-1 shrink-0">Start</div>`;
+            
+            // Dynamic Cases
+            appState.cases.forEach((c, i) => {
+                // Vertical line from previous
+                visualHtml += `<div id="line-pre-${i}" class="v-line h-6 shrink-0"></div>`;
+                
+                // Container for Decision Logic
+                visualHtml += `
+                <div class="relative w-full flex flex-col items-center shrink-0">
+                    <!-- Diamond Decision -->
+                    <div id="node-cond-${i}" class="flow-node bg-slate-900 border-2 border-slate-500 diamond-shape w-20 h-20 mb-2 z-10">
+                        <div class="diamond-content text-[10px] font-bold whitespace-nowrap">x == ${c.val}?</div>
+                    </div>
+
+                    <!-- YES Path (Right) -->
+                    <div id="path-yes-${i}" class="absolute top-10 left-[50%] ml-10 w-[25%] h-10 border-t-2 border-r-2 border-slate-600 connector-line rounded-tr-xl"></div>
+                    <div id="path-down-${i}" class="absolute top-20 right-[20%] w-0.5 h-6 bg-slate-600 connector-line"></div>
+
+                    <!-- Action Block -->
+                    <div class="absolute top-24 right-[5%] w-[30%]">
+                        <div id="node-action-${i}" class="flow-node bg-blue-900 p-1 rounded text-center text-[10px] mb-1 truncate">"${c.output}"</div>
+                        <div id="node-break-${i}" class="flow-node bg-pink-900 p-1 rounded text-center text-[10px]">Break</div>
+                    </div>
+                </div>`;
+            });
+
+            // Vertical line to default
+            visualHtml += `<div id="line-to-default" class="v-line h-8 shrink-0"></div>`;
+
+            // Default Case
+            visualHtml += `
+            <div class="relative w-full flex flex-col items-center shrink-0">
+                <div id="node-default-cond" class="flow-node bg-slate-700 p-2 rounded w-24 text-center font-bold text-xs mb-2 z-10">Default</div>
+                
+                <!-- YES Path (Default is always yes if reached) -->
+                <div id="path-default-yes" class="absolute top-5 left-[50%] ml-12 w-[20%] h-2 bg-slate-600 connector-line"></div>
+                <div id="path-default-down" class="absolute top-5 right-[20%] w-0.5 h-8 bg-slate-600 connector-line"></div>
+
+                <!-- Action Default -->
+                <div class="absolute top-12 right-[5%] w-[30%]">
+                    <div id="node-action-def" class="flow-node bg-blue-900 p-1 rounded text-center text-[10px] mb-1 truncate">"${appState.defaultOutput}"</div>
+                    <div id="node-break-def" class="flow-node bg-pink-900 p-1 rounded text-center text-[10px]">Break</div>
+                </div>
+            </div>`;
+
+            // Final End Node Area
+            visualHtml += `
+            <div class="mt-16 w-full flex justify-center relative shrink-0 pb-10">
+                 <!-- Visual collector line for breaks -->
+                 <div id="line-collector" class="absolute -top-[${appState.cases.length * 8 + 5}rem] right-[15%] w-0.5 h-[100%] bg-slate-600 connector-line opacity-30"></div>
+                 <div id="node-end" class="flow-node bg-slate-700 p-2 rounded-full w-24 text-center font-bold text-sm z-20">End</div>
+            </div>`;
+
+            visualContainer.innerHTML = visualHtml;
+            
+            // Adjust collector line height dynamically based on content
+            // (Simple visual hack, not perfect but works for demo)
+            const collector = document.getElementById('line-collector');
+            if(collector) {
+                collector.style.height = (appState.cases.length * 140 + 100) + 'px';
+                collector.style.top = (-1 * (appState.cases.length * 140)) + 'px';
+            }
+        }
+
+        // --- SIMULATION LOGIC ---
+
+        const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        async function runSimulation() {
+            // Reset Styles
+            document.querySelectorAll('.highlight').forEach(el => el.classList.remove('highlight'));
+            document.querySelectorAll('.active').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.active-check').forEach(el => el.classList.remove('active-check'));
+            document.querySelectorAll('.active-path').forEach(el => {
+                el.style.borderColor = '#334155'; // reset to slate
+                el.style.backgroundColor = '#334155';
+                el.classList.remove('active-path');
+                el.classList.remove('active-path-check');
+            });
+
+            const inputVal = parseInt(document.getElementById('simInputValue').value);
+
+            // Helpers
+            const highlight = (id) => document.getElementById(id)?.classList.add('highlight');
+            const activate = (id, type='active') => document.getElementById(id)?.classList.add(type);
+            const colorPath = (id, color) => {
+                const el = document.getElementById(id);
+                if(el) {
+                    el.style.borderColor = color;
+                    el.style.backgroundColor = color;
+                    el.classList.add(color === '#eab308' ? 'active-path-check' : 'active-path');
+                }
+            }
+
+            // START
+            activate('node-start');
+            highlight('code-switch');
+            await sleep(500);
+
+            let matched = false;
+
+            // Loop through dynamic cases
+            for (let i = 0; i < appState.cases.length; i++) {
+                const c = appState.cases[i];
+                
+                // Path from previous
+                if (i === 0) colorPath(`line-pre-0`, '#22c55e'); // Start line
+                else colorPath(`line-pre-${i}`, '#eab308'); // Yellow "fall through" line
+
+                await sleep(200);
+
+                // Check Condition
+                activate(`node-cond-${i}`, 'active-check');
+                highlight(`code-case-${i}`);
+                await sleep(600);
+
+                if (inputVal === c.val) {
+                    // MATCH FOUND
+                    matched = true;
+                    colorPath(`path-yes-${i}`, '#22c55e');
+                    colorPath(`path-down-${i}`, '#22c55e');
+                    await sleep(300);
+
+                    activate(`node-action-${i}`);
+                    highlight(`code-block-${i}`);
+                    await sleep(600);
+
+                    activate(`node-break-${i}`);
+                    highlight(`code-break-${i}`);
+                    await sleep(400);
+
+                    // Finish
+                    activate('node-end');
+                    highlight('code-end');
+                    return; // EXIT
+                } else {
+                    // NO MATCH
+                    document.getElementById(`node-cond-${i}`).classList.remove('active-check');
+                    // Continue loop to next i
+                }
+            }
+
+            // IF NO MATCH, GO TO DEFAULT
+            if (!matched) {
+                colorPath('line-to-default', '#eab308');
+                await sleep(300);
+
+                activate('node-default-cond', 'active-check');
+                highlight('code-default');
+                await sleep(600);
+
+                colorPath('path-default-yes', '#22c55e');
+                colorPath('path-default-down', '#22c55e');
+                await sleep(300);
+
+                activate('node-action-def');
+                highlight('code-block-def');
+                await sleep(600);
+
+                activate('node-break-def');
+                highlight('code-break-def');
+                await sleep(400);
+
+                activate('node-end');
+                highlight('code-end');
+            }
+        }
+
+        // Initial Load
+        init();
+
+    </script>
+</body>
+</html>

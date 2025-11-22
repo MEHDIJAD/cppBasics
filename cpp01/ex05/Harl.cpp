@@ -2,34 +2,34 @@
 #include <iostream>
 
 void harl::debug( void ){
-    std::cout 
-    << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger. I really do!"
-    << std::endl;
+    std::cout << BLUE
+    << "[DEBUG] Just checking... Is this thing on? Love me some bacon."
+    << RESET << std::endl;
 }
 
 void harl::info( void ){
-    std::cout 
-    << "I cannot believe adding extra bacon costs more money. You didn’t put enough bacon in my burger! If you did, I wouldn’t be asking for more!"
-    << std::endl;
+    std::cout << GREEN
+    << "[INFO] FYI: More bacon isn't free. And I wanted more bacon."
+    << RESET << std::endl;
 }
 void harl::warning( void )
 {
-    std::cout 
-    << "I think I deserve to have some extra bacon for free. I’ve been coming for years, whereas you started working here just last month."
-    << std::endl;
+    std::cout << YELLOW
+    << "[WARNING] Bacon levels are dangerously low. I've been a customer forever!"
+    << RESET << std::endl;
 }
 
 void harl::error( void ){
-    std::cout 
-    << "This is unacceptable! I want to speak to the manager now."
-    << std::endl;
+    std::cout << RED
+    << "[ERROR] THIS IS A DISASTER! WHERE IS THE MANAGER AND THE BACON?!"
+    << RESET << std::endl;
 }
 
 
 
 void harl::complain(std::string level)
 {
-    cp complain[] = {
+    t_complain complain[] = {
         {"DEBUG", &harl::debug},
         {"INFO", &harl::info},
         {"WARNING", &harl::warning},

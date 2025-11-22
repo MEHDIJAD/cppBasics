@@ -11,6 +11,7 @@
 #define GREEN   "\033[32m"
 #define YELLOW  "\033[33m"
 #define BLUE    "\033[34m"
+#define GRAY    "\033[90m" // Added GRAY color
 
 class harl
 {
@@ -25,10 +26,18 @@ class harl
 
 typedef void (harl::*funcPtr)(void);
 
-typedef struct s_complain
-{
-    std::string level;
-    funcPtr action;
-}   t_complain;
+enum Level{
+    DEBUG,
+    INFO,
+    WARNING,
+    ERROR,
+    NONE,  
+};
+
+// typedef struct  s_complain
+// {
+//     std::string level;
+//     funcPtr action;
+// }   t_complain;
 
 #endif
