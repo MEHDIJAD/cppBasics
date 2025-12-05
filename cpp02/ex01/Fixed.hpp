@@ -35,11 +35,10 @@ class Fixed
 		float toFloat( void ) const;
 
 		/*! @brief converts the fixed-point value to an integer value*/
-		int toInt( void ) const;
-
-		/* Overloading the inserrtion operator (<<)*/
+		int toInt( void ) const;	
 };
-
+	
+/* Overloading the inserrtion operator (<<)*/
 std::ostream &operator<<(std::ostream &os, const Fixed &fixed);
 
 
