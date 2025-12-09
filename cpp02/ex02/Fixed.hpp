@@ -45,23 +45,13 @@ class Fixed
 		bool operator==(const Fixed &other) const;
 		bool operator!=(const Fixed &other) const;
 
-		// Arithmetic operators
+		/* Arithmetic operators */
 		Fixed operator+(const Fixed &other) const;
-		Fixed operator-(const Fixed &other) const;
-		Fixed operator*(const Fixed &other) const;
-		Fixed operator/(const Fixed &other) const;
+        Fixed operator-(const Fixed &other) const;
+        Fixed operator*(const Fixed &other) const;
+        Fixed operator/(const Fixed &other) const;
 
-		// Increment/Decrement operators
-		Fixed &operator++();   // Pre-increment
-		Fixed operator++(int); // Post-increment
-		Fixed &operator--();   // Pre-decrement
-		Fixed operator--(int); // Post-decrement
 
-		// Static member functions
-		static Fixed &min(Fixed &a, Fixed &b);
-		static const Fixed &min(const Fixed &a, const Fixed &b);
-		static Fixed &max(Fixed &a, Fixed &b);
-		static const Fixed &max(const Fixed &a, const Fixed &b);
 };
 	
 /* Overloading the inserrtion operator (<<)*/
