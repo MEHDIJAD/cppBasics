@@ -1,7 +1,7 @@
 SRC = main.cpp ClapTrap.cpp ScavTrap.cpp 
 OBJ = $(SRC:.cpp=.o)
 
-NAME = program
+NAME = ScavTrap
 
 COMPILER = c++
 FLAGS = -Wall -Wextra -Werror -g

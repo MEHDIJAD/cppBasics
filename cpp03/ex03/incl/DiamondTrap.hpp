@@ -6,7 +6,7 @@
 #include "ScavTrap.hpp"
 
 /* Multy inheritance */
-class DiamondTrap : public FragTrap , public ScavTrap 
+class DiamondTrap : public FragTrap , public ScavTrap
 {
 	private:
 		std::string _Name; //* // <--- The "Shadow" Name (This hides ClapTrap::_Name)
@@ -22,7 +22,10 @@ class DiamondTrap : public FragTrap , public ScavTrap
 
 		/* Destructor */
 		~DiamondTrap( void );
+
 		void whoAmI();
+		void attack(const std::string &target);
+
 };
 
 #endif

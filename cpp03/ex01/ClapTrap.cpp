@@ -1,6 +1,7 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
+/* Default Constructor */
 ClapTrap::ClapTrap( void ) {
 	std::cout << BLUE << "ClapTrap" << RESET << " " << this->getName() << " Default Constructor called" << std::endl;
 }
@@ -13,14 +14,6 @@ ClapTrap::ClapTrap(std::string Name) :
 _Name(Name), _HitPoint(10), _EnergyPoint(10), _AttackDamage(0)
 {
 	std::cout << BLUE << "ClapTrap" << RESET << " " << this->getName() << " Constructor called" << std::endl;
-}
-
-/**
- * @brief Destroys the ClapTrap object.
- */
-ClapTrap::~ClapTrap( void )
-{
-	std::cout << BLUE << "ClapTrap" << RESET << " " << this->getName() << " Destructor called" << std::endl;
 }
 
 /**
@@ -49,6 +42,14 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 	}
 	std::cout << BLUE << "ClapTrap" << RESET << " " << this->getName() << " Assignment operator called" << std::endl;
 	return(*this);
+}
+
+/**
+ * @brief Destroys the ClapTrap object.
+ */
+ClapTrap::~ClapTrap( void )
+{
+	std::cout << BLUE << "ClapTrap" << RESET << " " << this->getName() << " Destructor called" << std::endl;
 }
 
 /**

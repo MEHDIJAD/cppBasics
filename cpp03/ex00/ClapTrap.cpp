@@ -1,6 +1,7 @@
 #include "ClapTrap.hpp"
 #include <iostream>
 
+/* Default Constructor */
 ClapTrap::ClapTrap( void ) {
 	std::cout << BLUE << "ClapTrap " << this->getName() << " Default Constructor called" << RESET << std::endl;
 }
@@ -12,7 +13,9 @@ ClapTrap::ClapTrap( void ) {
 ClapTrap::ClapTrap(std::string Name) :
 _Name(Name), _HitPoint(10), _EnergyPoint(10), _AttackDamage(0)
 {
-	std::cout << BLUE << "ClapTrap " << this->getName() << " Constructor called" << RESET << std::endl;
+	std::cout << BLUE << "ClapTrap "
+	<< this->getName() << " Constructor called"
+	<< RESET << std::endl;
 }
 
 /**
@@ -20,7 +23,9 @@ _Name(Name), _HitPoint(10), _EnergyPoint(10), _AttackDamage(0)
  */
 ClapTrap::~ClapTrap( void )
 {
-	std::cout << BLUE << "ClapTrap " << this->getName() << " Destructor called" << RESET << std::endl;
+	std::cout << BLUE << "ClapTrap "
+	<< this->getName() << " Destructor called"
+	<< RESET << std::endl;
 }
 
 /**
@@ -30,7 +35,9 @@ ClapTrap::~ClapTrap( void )
 ClapTrap::ClapTrap(const ClapTrap &other) :
 _Name(other._Name), _HitPoint(other._HitPoint), _EnergyPoint(other._EnergyPoint), _AttackDamage(other._AttackDamage)
 {
-	std::cout << BLUE << "ClapTrap " << this->getName() << " Copy constructor called" << RESET << std::endl;
+	std::cout << BLUE << "ClapTrap "
+	<< this->getName() << " Copy constructor called"
+	<< RESET << std::endl;
 }
 
 /**
@@ -47,7 +54,9 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 		this->_EnergyPoint = other._EnergyPoint;
 		this->_AttackDamage = other._AttackDamage;
 	}
-	std::cout << BLUE << "ClapTrap " << this->getName() << " Assignment operator called" << RESET << std::endl;
+	std::cout << BLUE << "ClapTrap "
+	<< this->getName() << " Assignment operator called"
+	<< RESET << std::endl;
 	return(*this);
 }
 

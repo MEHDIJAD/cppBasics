@@ -1,10 +1,10 @@
 SRC = main.cpp ClapTrap.cpp
 OBJ = $(SRC:.cpp=.o)
 
-NAME = program
+NAME = ClapTrap
 
 COMPILER = c++
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
 PLUSFLAG = -std=c++98
 HEADERS = ClapTrap.hpp
 

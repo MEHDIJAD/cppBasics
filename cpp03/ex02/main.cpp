@@ -4,16 +4,24 @@
 
 int main(void)
 {
-	ScavTrap p("MAEK-1");
-	p.attack("Target-1");
-	p.guardGate();
-	
+	std::cout << "|- ClapTrap TEST -|" << std::endl;
+	ClapTrap clap("MARK-1");
+	clap.attack("Target-1");
+	clap.takeDamage(8);
+	clap.beRepaired(11);
+
 	std::cout << std::endl;
-	
+
+	std::cout << "|- ScavTrap TEST -|" << std::endl;
+	ScavTrap p("MAEK-2");
+	p.attack("Cat-1");
+
+	std::cout << std::endl;
+
+	std::cout << "|- FragTrap TEST -|" << std::endl;
 	FragTrap f("FR4G-TP");
 	f.attack("arget-2");
 	f.highFivesGuys();
-
-	std::cout << std::endl;
+	
 	return (0);
 }
