@@ -15,14 +15,10 @@ class ClapTrap
 {
 	private:
 
-		protected:
-		/* Name, which is passed as a parameter to the constructor */
+	protected:
 		std::string _Name;
-		/*! @brief Hit points (10), Representing the health of the ClapTrap */
 		unsigned int _HitPoint;
-		/* Energy points (10) */
 		unsigned int _EnergyPoint;
-		/* Attack damage (0) */
 		unsigned int _AttackDamage;
 
 	public:

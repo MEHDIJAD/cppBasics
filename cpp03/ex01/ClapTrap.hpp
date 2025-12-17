@@ -22,11 +22,8 @@ class ClapTrap
 	protected:
 		/*! @brief @param Name passed as a parameter to the constructor */
 		std::string _Name;
-		/*! @brief Hit points (10), Representing the health of the ClapTrap */
 		unsigned int _HitPoint;
-		/* Energy points (10) */
 		unsigned int _EnergyPoint;
-		/* Attack damage (0) */
 		unsigned int _AttackDamage;
 
 	public:

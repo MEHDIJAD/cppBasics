@@ -35,16 +35,15 @@ FragTrap(Name), ScavTrap(Name)
 DiamondTrap::DiamondTrap(const DiamondTrap &other) : 
 ClapTrap(other), FragTrap(other), ScavTrap(other) 
 {
+	this->_Name = other._Name;
 	std::cout << GRAY << "FragTrap" << RESET << " Copy Constructor called" << std::endl;
 }
 
 /* Assigment Operator */
 DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other)
 {
-	ClapTrap::operator=(other);
-	FragTrap::operator=(other);
-	ScavTrap::operator=(other);
 	if (this != &other){
+		ClapTrap::operator=(other);
 		this->_Name = other._Name;
 	}
 	std::cout << GRAY << "FragTrap" << RESET << " Assignment Operator called" << std::endl;
@@ -57,12 +56,13 @@ DiamondTrap::~DiamondTrap( void )
 	std::cout << GRAY << "DiamondTrap" << RESET << " " << this->_Name << " Destructor called" << std::endl;
 }
 
+void DiamondTrap::attack(const std::string &target)
+{
+	ScavTrap::attack(target);
+}
+
 void DiamondTrap::whoAmI() {
     std::cout  << GRAY << "My Diamond name is: " << this->_Name << std::endl;
     std::cout <<  BLUE << "My ClapTrap name is: " << ClapTrap::_Name << std::endl;
 }
 
-void DiamondTrap::attack(const std::string &target)
-{
-	ScavTrap::attack(target);
-}

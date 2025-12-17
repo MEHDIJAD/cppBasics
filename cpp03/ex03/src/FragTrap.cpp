@@ -6,7 +6,7 @@ FragTrap::FragTrap( void ) : ClapTrap() {
 	std::cout << CYAN << "FragTrap" << RESET << " Default Constructor called" << std::endl;
 }
 
-// Parameterized Constructor
+/* Parameterized Constructor */
 FragTrap::FragTrap( std::string name ) : ClapTrap(name) {
 	this->_HitPoint = 100;
 	this->_EnergyPoint = 100;
@@ -14,21 +14,22 @@ FragTrap::FragTrap( std::string name ) : ClapTrap(name) {
 	std::cout << CYAN << "FragTrap" << RESET << " " << this->getName() << " Constructor called" << std::endl;
 }
 
-// Copy Constructor
+/* Copy Constructor */
 FragTrap::FragTrap( const FragTrap &other ) : ClapTrap(other) {
 	std::cout << CYAN << "FragTrap" << RESET << " Copy Constructor called" << std::endl;
 }
 
-// Destructor
-FragTrap::~FragTrap( void ) {
-	std::cout << CYAN << "FragTrap" << RESET << " " << this->getName() << " Destructor called" << std::endl;
-}
 
-// Assignment Operator
+/* Assignment Operator */
 FragTrap &FragTrap::operator=( const FragTrap &other ) {
 	ClapTrap::operator=(other);
 	std::cout << CYAN << "FragTrap" << RESET << " Assignment Operator called" << std::endl;
 	return (*this);
+}
+
+/* Destructor */
+FragTrap::~FragTrap( void ) {
+	std::cout << CYAN << "FragTrap" << RESET << " " << this->getName() << " Destructor called" << std::endl;
 }
 
 // Attack function

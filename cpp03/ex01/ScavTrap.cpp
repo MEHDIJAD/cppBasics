@@ -38,9 +38,7 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &other) {
 	return (*this);
 }
 
-
 /* Destructor */
-
 ScavTrap::~ScavTrap( void ){
 	std::cout << YELLOW << "ScavTrap" << RESET << " " << this->getName() << " Destructor called" << std::endl;
 }

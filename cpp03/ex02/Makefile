@@ -17,7 +17,7 @@ OBJ = $(MAIN_OBJ) $(OTHER_OBJ)
 NAME = FragTrap
 
 COMPILER = c++
-FLAGS = -Wall -Wextra -Werror -g -I$(INCL_DIR)
+FLAGS = -Wall -Wextra -Werror -I$(INCL_DIR)
 PLUSFLAG = -std=c++98
 
 

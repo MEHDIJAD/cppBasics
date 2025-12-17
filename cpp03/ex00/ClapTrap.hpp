@@ -14,11 +14,8 @@ class ClapTrap
 	private:
 		/*! @brief @param Name passed as a parameter to the constructor */
 		std::string _Name;
-		/*! @brief Hit points (10), Representing the health of the ClapTrap */
 		unsigned int _HitPoint;
-		/* Energy points (10) */
 		unsigned int _EnergyPoint;
-		/* Attack damage (0) */
 		unsigned int _AttackDamage;
 
 	public:
@@ -37,6 +34,8 @@ class ClapTrap
 		void setName(std::string const Name);
 		/* Getter Func */
 		std::string getName( void ) const;
+
+		/* For debugging */
 		unsigned int getHitPoints( void ) const;
 		
 		void attack(const std::string& target);

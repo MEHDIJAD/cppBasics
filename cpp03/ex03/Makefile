@@ -13,7 +13,7 @@ OBJ = $(MAIN_OBJ) $(OTHER_OBJ)
 NAME = DiamondTrap
 
 COMPILER = c++
-FLAGS = -Wall -Wextra -Werror  -Wshadow -g -Iincl
+FLAGS = -Wall -Wextra -Werror -Wshadow -Iincl
 PLUSFLAG = -std=c++98
 
 

@@ -18,15 +18,6 @@ _Name(Name), _HitPoint(10), _EnergyPoint(10), _AttackDamage(0)
 	<< RESET << std::endl;
 }
 
-/**
- * @brief Destroys the ClapTrap object.
- */
-ClapTrap::~ClapTrap( void )
-{
-	std::cout << BLUE << "ClapTrap "
-	<< this->getName() << " Destructor called"
-	<< RESET << std::endl;
-}
 
 /**
  * @brief Copy constructor for ClapTrap.
@@ -59,6 +50,17 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 	<< RESET << std::endl;
 	return(*this);
 }
+
+/**
+ * @brief Destroys the ClapTrap object.
+ */
+ClapTrap::~ClapTrap( void )
+{
+	std::cout << BLUE << "ClapTrap "
+	<< this->getName() << " Destructor called"
+	<< RESET << std::endl;
+}
+
 
 /**
  * @brief Sets the name of the ClapTrap.

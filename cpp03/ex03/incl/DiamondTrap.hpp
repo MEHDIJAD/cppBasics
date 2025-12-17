@@ -25,8 +25,8 @@ class DiamondTrap : public FragTrap , public ScavTrap
 		/* Destructor */
 		~DiamondTrap( void );
 
-		void whoAmI();
 		void attack(const std::string &target);
+		void whoAmI();
 };
 
 #endif

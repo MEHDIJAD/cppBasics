@@ -4,7 +4,7 @@ OBJ = $(SRC:.cpp=.o)
 NAME = ScavTrap
 
 COMPILER = c++
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
 PLUSFLAG = -std=c++98
 HEADERS = ClapTrap.hpp ScavTrap.hpp 
 
