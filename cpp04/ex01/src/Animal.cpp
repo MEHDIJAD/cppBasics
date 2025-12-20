@@ -7,13 +7,11 @@ Animal::Animal(void) : type("")
               << std::endl;
 }
 
-/*! Paramertize Constructor 
-    @note the Animal class can be left empty or set to the value of your choice. 
-*/
+/* Paramertize Constructor */
 Animal::Animal(std::string type) : type(type)
 {
     std::cout << YELLOW << "Animal " << this->type << RESET
-    << " Constructor called" << std::endl;
+              << " Constructor called" << std::endl;
 }
 
 /* Copy Costructor */
