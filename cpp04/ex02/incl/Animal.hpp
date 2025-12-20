@@ -39,7 +39,8 @@ class Animal
     * * This function is virtual to allow derived classes (like Dog and Cat) 
     * to override it and output their unique sounds.
     */
-    virtual void makeSound(void) const ;
+    // Pure Virtual Function
+    virtual void makeSound(void) const = 0;
 };
 
 #endif

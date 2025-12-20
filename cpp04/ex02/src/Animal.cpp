@@ -49,7 +49,10 @@ std::string Animal::getType(void) const
     return (this->type);
 }
 
-void Animal::makeSound(void) const 
-{
-    std::cout << YELLOW << "Animal Say What 🧠🧠 " << std::endl;
-}
+
+//* We do not need this 
+//* pure virtual, it doesn't need a default implementation anymore (though C++ allows it in special cases
+// void Animal::makeSound(void) const 
+// {
+//     std::cout << YELLOW << "Animal Say What 🧠🧠 " << std::endl;
+// }

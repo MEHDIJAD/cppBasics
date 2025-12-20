@@ -63,5 +63,12 @@ int main(void)
     std::cout  << GREEN << "\n\nAssigning B = A...\n" << std::endl;
     dogB = dogA;
 
+	// ========================================================================
+    // TEST 3: Abstract Class
+    // ========================================================================
+	// Animal test; // Variable type 'Animal' is an abstract class
+	// OR
+	// const Animal* ptr = new Animal(); // Allocating an object of abstract class type 'Animal'
+
 	return 0;
 }

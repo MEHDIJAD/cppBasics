@@ -14,7 +14,7 @@ OTHER_OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.cpp=.o))
 
 OBJ = $(MAIN_OBJ) $(OTHER_OBJ)
 
-NAME = Brain
+NAME = Abstract
 
 COMPILER = c++
 FLAGS = -Wall -Wextra -Werror -I$(INCL_DIR)
