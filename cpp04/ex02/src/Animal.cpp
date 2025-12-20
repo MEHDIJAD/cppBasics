@@ -8,7 +8,7 @@ Animal::Animal(void) : type("")
 }
 
 /* Paramertize Constructor */
-Animal::Animal(std::string type) : type(type)
+Animal::Animal(std::string &type) : type(type)
 {
     std::cout << YELLOW << "Animal " << this->type << RESET
               << " Constructor called" << std::endl;
