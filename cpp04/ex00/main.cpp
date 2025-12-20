@@ -20,7 +20,7 @@ int main(void)
     delete meta;
 
 	std::cout << std::endl;
-	std::cout << YELLOW << "WRONG ANIMAL TEST:" << std::endl;
+	std::cout << YELLOW << "WRONG ANIMAL TEST:\n\n";
 
 	const WrongAnimal *wrong = new WrongCat();
 	std::cout << wrong->getType() << std::endl;
