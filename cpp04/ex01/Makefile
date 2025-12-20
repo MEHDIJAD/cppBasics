@@ -1,9 +1,9 @@
 SRC_DIR = src
-SRC_FILES = Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
+SRC_FILES = Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
 INCL_DIR = incl
-HEADER_FILES = Animal.hpp Dog.hpp Cat.hpp WrongAnimal.hpp WrongCat.hpp
+HEADER_FILES = Animal.hpp Dog.hpp Cat.hpp WrongAnimal.hpp WrongCat.hpp Brain.hpp
 HEADER = $(addprefix $(INCL_DIR)/, $(HEADER_FILES))
 
 MAIN_SRC = main.cpp
@@ -14,7 +14,7 @@ OTHER_OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.cpp=.o))
 
 OBJ = $(MAIN_OBJ) $(OTHER_OBJ)
 
-NAME = Animal
+NAME = Brain
 
 COMPILER = c++
 FLAGS = -Wall -Wextra -Werror -I$(INCL_DIR)
