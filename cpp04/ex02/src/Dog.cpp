@@ -3,7 +3,7 @@
 
 /* Default Costructor */
 Dog::Dog( void ) : Animal(){
-	SetType("Dog");
+	this->type = "Dog";
 	std::cout <<  BLUE <<  this->type << RESET << " Constructor called" << std::endl; 
 	this->attr = new (Brain); /* Allocates memory */
 }

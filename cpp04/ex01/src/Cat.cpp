@@ -2,15 +2,15 @@
 
 /* Default Costructor */
 Cat::Cat( void ) : Animal() {
-	this->attr = new Brain();
-	SetType("Cat");
+	this->type = "Cat";
 	std::cout <<  GREEN <<  this->type << RESET << " Constructor called" << std::endl; 
+	this->attr = new Brain();
 }
 
 /* Copy Costructor */
 Cat::Cat(const Cat &other) : Animal(other){
-	this->attr = new Brain(*other.attr);
 	std::cout <<  GREEN <<  this->type << RESET << " Deep Copy created✔️" << std::endl; 
+	this->attr = new Brain(*other.attr);
 }
 
 /* Assigment Operator */
@@ -27,8 +27,8 @@ Cat &Cat::operator=(const Cat &other){
 
 /* Destructor */
 Cat::~Cat ( void ){
-	delete this->attr;
 	std::cout <<  GREEN <<  "Cat " << RESET << "Destructor called" << std::endl;	
+	delete this->attr;
 }
 
 void Cat::makeSound( void ) const {

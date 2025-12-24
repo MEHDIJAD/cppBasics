@@ -3,7 +3,7 @@
 /* Default Costructor */
 Cat::Cat( void ) : Animal() {
 	this->attr = new Brain();
-	SetType("Cat");
+	this->type = "Cat";
 	std::cout <<  GREEN <<  this->type << RESET << " Constructor called" << std::endl; 
 }
 

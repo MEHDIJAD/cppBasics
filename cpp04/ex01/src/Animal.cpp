@@ -8,7 +8,7 @@ Animal::Animal(void) : type("")
 }
 
 /* Paramertize Constructor */
-Animal::Animal(std::string type) : type(type)
+Animal::Animal(std::string &type) : type(type)
 {
     std::cout << YELLOW << "Animal " << this->type << RESET
               << " Constructor called" << std::endl;
@@ -19,14 +19,13 @@ Animal::Animal(const Animal &other)
 {
     this->type = other.type;
     std::cout << YELLOW << "Animal " << this->type << RESET
-              << " Constructor called" << std::endl;
+              << " Copy Constructor called" << std::endl;
 }
 
 /* Assigment Operator */
 Animal &Animal::operator=(const Animal &other)
 {
-    if (this != &other)
-    {
+    if (this != &other){
         this->type = other.type;
     }
     return (*this);
@@ -37,11 +36,6 @@ Animal::~Animal(void)
 {
     std::cout << YELLOW << "Animal " << this->type << RESET
               << " Destructor called" << std::endl;
-}
-
-void Animal::SetType(const std::string type)
-{
-    this->type = type;
 }
 
 std::string Animal::getType(void) const

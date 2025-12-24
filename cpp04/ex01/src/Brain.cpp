@@ -4,7 +4,7 @@ Brain::Brain( void ){
 	std::cout << GRAY << "Brain Constructor called" << RESET << std::endl;
 }
 
-Brain::Brain( const Brain &other)
+Brain::Brain(const Brain &other)
 {
 	for (size_t i = 0; i < 100; i++){
 		this->ideas[i] = other.ideas[i];

@@ -16,12 +16,11 @@ private:
 
    public:
     WrongAnimal(void);
-    WrongAnimal(std::string type);
+    WrongAnimal(std::string &type);
     WrongAnimal(const WrongAnimal &other);
     WrongAnimal &operator=(const WrongAnimal &other);
 	~WrongAnimal();
 
-    void SetType(const std::string type);
     std::string getType(void) const;
 
     void makeSound(void) const ;

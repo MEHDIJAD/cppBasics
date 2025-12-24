@@ -19,7 +19,7 @@ WrongAnimal::WrongAnimal(const WrongAnimal &other)
 {
     this->type = other.type;
     std::cout << YELLOW << "WrongAnimal " << this->type << RESET
-              << " Constructor called" << std::endl;
+              << " Copy Constructor called" << std::endl;
 }
 
 /* Assigment Operator */
@@ -39,10 +39,6 @@ WrongAnimal::~WrongAnimal(void)
               << " Destructor called" << std::endl;
 }
 
-void WrongAnimal::SetType(const std::string type)
-{
-    this->type = type;
-}
 
 std::string WrongAnimal::getType(void) const
 {

@@ -3,13 +3,14 @@
 /* Default Costructor */
 WrongCat::WrongCat( void ) : WrongAnimal() {
 
-	SetType("WrongCat");
+	this->type = "WrongCat";
 	std::cout <<  GREEN <<  this->type << RESET << " Constructor called" << std::endl; 
 }
 
 /* Copy Costructor */
 WrongCat::WrongCat(const WrongCat &other) : WrongAnimal(other){
-
+	std::cout << GREEN << this->getType() << this->type << RESET
+    << " Copy Constructor called" << std::endl;
 }
 
 /* Assigment Operator */

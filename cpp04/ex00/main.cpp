@@ -19,8 +19,7 @@ int main(void)
     delete i;
     delete meta;
 
-	std::cout << std::endl;
-	std::cout << YELLOW << "WRONG ANIMAL TEST:\n\n";
+	std::cout << YELLOW << "\n\nWRONG ANIMAL TEST:\n\n";
 
 	const WrongAnimal *wrong = new WrongCat();
 	std::cout << wrong->getType() << std::endl;
@@ -28,6 +27,6 @@ int main(void)
 	wrong->makeSound();
 
 	delete  wrong;
-	
+
 	return 0;
 }

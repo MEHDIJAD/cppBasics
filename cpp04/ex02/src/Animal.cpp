@@ -4,7 +4,7 @@
 Animal::Animal(void) : type("")
 {
     std::cout << YELLOW << "Animal " << RESET << "Constructor called"
-              << std::endl;
+    << std::endl;
 }
 
 /* Paramertize Constructor */
@@ -37,11 +37,6 @@ Animal::~Animal(void)
 {
     std::cout << YELLOW << "Animal " << this->type << RESET
               << " Destructor called" << std::endl;
-}
-
-void Animal::SetType(const std::string type)
-{
-    this->type = type;
 }
 
 std::string Animal::getType(void) const

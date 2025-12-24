@@ -17,7 +17,7 @@ class Animal
     /* Default Constructor */
     Animal(void);
     /* Paramertize Constructor */
-    Animal(std::string type);
+    Animal(std::string &type);
     /* Copy Costructor */
     Animal(const Animal &other);
     /* Assigment Operator */
@@ -31,7 +31,6 @@ class Animal
     */
     virtual ~Animal();
 
-    void SetType(const std::string type);
     std::string getType(void) const;
 
     /**

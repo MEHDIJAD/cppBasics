@@ -3,13 +3,13 @@
 
 /* Default Costructor */
 Dog::Dog( void ) : Animal(){
-	SetType("Dog");
+	this->type = "Dog";
 	std::cout <<  BLUE <<  this->type << RESET << " Constructor called" << std::endl; 
 }
 
 /* Copy Costructor */
 Dog::Dog(const Dog &other) : Animal(other){
-	std::cout <<  BLUE <<  this->type << RESET << " Constructor called" << std::endl; 
+	std::cout <<  BLUE <<  this->type << RESET << " Copy Constructor called" << std::endl; 
 }
 
 /* Assigment Operator */

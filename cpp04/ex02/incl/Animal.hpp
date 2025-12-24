@@ -31,7 +31,6 @@ class Animal
     */
     virtual ~Animal();
 
-    void SetType(const std::string type);
     std::string getType(void) const;
 
     /**

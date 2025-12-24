@@ -3,7 +3,7 @@
 /* Default Costructor */
 WrongCat::WrongCat( void ) : WrongAnimal() {
 
-	SetType("WrongCat");
+	this->type = "WrongCat";
 	std::cout <<  GREEN <<  this->type << RESET << " Constructor called" << std::endl; 
 }
 

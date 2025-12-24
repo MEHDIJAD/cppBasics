@@ -39,11 +39,6 @@ WrongAnimal::~WrongAnimal(void)
               << " Destructor called" << std::endl;
 }
 
-void WrongAnimal::SetType(const std::string type)
-{
-    this->type = type;
-}
-
 std::string WrongAnimal::getType(void) const
 {
     return (this->type);

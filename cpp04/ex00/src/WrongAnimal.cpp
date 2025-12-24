@@ -8,7 +8,7 @@ WrongAnimal::WrongAnimal(void)
 }
 
 /* Paramertize Constructor */
-WrongAnimal::WrongAnimal(std::string type) : type(type)
+WrongAnimal::WrongAnimal(std::string &type) : type(type)
 {
     std::cout << YELLOW << "WrongAnimal " << this->type << RESET
               << " Constructor called" << std::endl;
@@ -19,7 +19,7 @@ WrongAnimal::WrongAnimal(const WrongAnimal &other)
 {
     this->type = other.type;
     std::cout << YELLOW << "WrongAnimal " << this->type << RESET
-              << " Constructor called" << std::endl;
+              << " Copy Constructor called" << std::endl;
 }
 
 /* Assigment Operator */
@@ -36,12 +36,7 @@ WrongAnimal &WrongAnimal::operator=(const WrongAnimal &other)
 WrongAnimal::~WrongAnimal(void)
 {
     std::cout << YELLOW << "WrongAnimal " << this->type << RESET
-              << " Destructor called" << std::endl;
-}
-
-void WrongAnimal::SetType(const std::string type)
-{
-    this->type = type;
+    << " Destructor called" << std::endl;
 }
 
 std::string WrongAnimal::getType(void) const
