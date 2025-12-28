@@ -1,9 +1,9 @@
 #include "../incl/AMateria.hpp"
 
-//? do we need to add This
-// AMateria::AMateria( void ) : type(""){
-
-// }
+AMateria::AMateria( void ) : type(""){
+    std::cout << MAGENTA << "AMateria " << RESET
+    << "Private Default Constructor called" << std::endl;
+}
 
 AMateria::AMateria(std::string const &type) : type(type)
 {
