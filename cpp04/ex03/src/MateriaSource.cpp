@@ -1,5 +1,8 @@
 #include "../incl/MateriaSource.hpp"
 
+/**
+ * @brief Default constructor for MateriaSource.
+ */
 MateriaSource::MateriaSource( void )
 {
 	for (size_t i = 0; i < 4; i++){
@@ -10,6 +13,10 @@ MateriaSource::MateriaSource( void )
 	<< " Constructor called" << std::endl;
 }
 
+/**
+ * @brief Copy constructor for MateriaSource.
+ * @param other The other MateriaSource object to copy.
+ */
 MateriaSource::MateriaSource(const MateriaSource &other){
 	std::cout << GRAY <<  "MateriaSource" << RESET
 	<< " Copy Constructor called" << std::endl;
@@ -24,6 +31,11 @@ MateriaSource::MateriaSource(const MateriaSource &other){
 	}
 }
 
+/**
+ * @brief Assignment operator for MateriaSource.
+ * @param other The other MateriaSource object to assign from.
+ * @return A reference to the current MateriaSource object.
+ */
 MateriaSource	&MateriaSource::operator=(const MateriaSource &other)
 {
 	if (this != &other)
@@ -52,6 +64,9 @@ MateriaSource	&MateriaSource::operator=(const MateriaSource &other)
 	return *this;
 }
 
+/**
+ * @brief Destructor for MateriaSource.
+ */
 MateriaSource::~MateriaSource( void )
 {
 	std::cout << GRAY <<  "MateriaSource" << RESET
@@ -65,6 +80,10 @@ MateriaSource::~MateriaSource( void )
     }
 }
 
+/**
+ * @brief Learns a materia.
+ * @param lsrc The materia to learn.
+ */
 void MateriaSource::learnMateria(AMateria *lsrc)
 {
 	if (lsrc == NULL){
@@ -85,6 +104,11 @@ void MateriaSource::learnMateria(AMateria *lsrc)
 	*/
 }
 
+/**
+ * @brief Creates a materia.
+ * @param type The type of the materia to create.
+ * @return A pointer to the created materia.
+ */
 AMateria *MateriaSource::createMateria(std::string const &type)
 {
 	for (size_t i = 0; i < 4; i++)
@@ -97,5 +121,3 @@ AMateria *MateriaSource::createMateria(std::string const &type)
 	}
 	return 0;
 }
-
-

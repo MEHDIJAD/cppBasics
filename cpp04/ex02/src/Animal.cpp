@@ -1,20 +1,28 @@
 #include "../incl/Animal.hpp"
 
-/* Default Costructor */
+/**
+ * @brief Default constructor for Animal.
+ */
 Animal::Animal(void) : type("")
 {
     std::cout << YELLOW << "Animal " << RESET << "Constructor called"
     << std::endl;
 }
 
-/* Paramertize Constructor */
+/**
+ * @brief Constructs an Animal object with a given type.
+ * @param type The type of the animal.
+ */
 Animal::Animal(std::string &type) : type(type)
 {
     std::cout << YELLOW << "Animal " << this->type << RESET
               << " Constructor called" << std::endl;
 }
 
-/* Copy Costructor */
+/**
+ * @brief Copy constructor for Animal.
+ * @param other The other Animal object to copy.
+ */
 Animal::Animal(const Animal &other)
 {
     this->type = other.type;
@@ -22,7 +30,11 @@ Animal::Animal(const Animal &other)
               << " Constructor called" << std::endl;
 }
 
-/* Assigment Operator */
+/**
+ * @brief Assignment operator for Animal.
+ * @param other The other Animal object to assign from.
+ * @return A reference to the current Animal object.
+ */
 Animal &Animal::operator=(const Animal &other)
 {
     if (this != &other)
@@ -32,13 +44,19 @@ Animal &Animal::operator=(const Animal &other)
     return (*this);
 }
 
-/* Destructor */
+/**
+ * @brief Destructor for Animal.
+ */
 Animal::~Animal(void)
 {
     std::cout << YELLOW << "Animal " << this->type << RESET
               << " Destructor called" << std::endl;
 }
 
+/**
+ * @brief Returns the type of the animal.
+ * @return The type of the animal.
+ */
 std::string Animal::getType(void) const
 {
     return (this->type);

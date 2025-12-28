@@ -1,5 +1,9 @@
 #include "../incl/Character.hpp"
 
+/**
+ * @brief Constructs a Character object with a given name.
+ * @param name The name of the character.
+ */
 Character::Character(std::string const &name) : Name(name)
 {
     for (size_t i = 0; i < 4; i++){
@@ -9,7 +13,10 @@ Character::Character(std::string const &name) : Name(name)
     << " Constructor called" << std::endl;
 }
 
-
+/**
+ * @brief Copy constructor for Character.
+ * @param other The other Character object to copy.
+ */
 Character::Character(const Character &other)
 {
 	this->Name = other.getName();
@@ -25,6 +32,11 @@ Character::Character(const Character &other)
     << " Deep Copy Constructor called" << std::endl;
 }
 
+/**
+ * @brief Assignment operator for Character.
+ * @param other The other Character object to assign from.
+ * @return A reference to the current Character object.
+ */
 Character &Character::operator=(const Character &other)
 {
     if (this != &other) {
@@ -50,6 +62,9 @@ Character &Character::operator=(const Character &other)
     return *this;
 }
 
+/**
+ * @brief Destructor for Character.
+ */
 Character::~Character( void )
 {
     for (size_t i = 0; i < 4; i++){
@@ -62,10 +77,18 @@ Character::~Character( void )
     << " Destructor called" << std::endl;
 }
 
+/**
+ * @brief Returns the name of the character.
+ * @return A constant reference to the name of the character.
+ */
 std::string const &Character::getName() const{
     return (this->Name);
 }
 
+/**
+ * @brief Equips a materia to the character.
+ * @param m The materia to equip.
+ */
 void Character::equip(AMateria *m)
 {
 	if (m == NULL){
@@ -90,6 +113,10 @@ void Character::equip(AMateria *m)
 	*/
 }
 
+/**
+ * @brief Unequips a materia from the character.
+ * @param idx The index of the materia to unequip.
+ */
 void Character::unequip(int idx){
 	if (idx >= 0 && idx < 4 && this->inventory[idx] != NULL) {
         // Just remove it from the inventory. 
@@ -100,6 +127,11 @@ void Character::unequip(int idx){
 	
 }
 
+/**
+ * @brief Uses a materia on a target character.
+ * @param indx The index of the materia to use.
+ * @param target The character to use the materia on.
+ */
 void Character::use(int indx, ICharacter &target)
 {
 	if (indx >= 0 && indx < 4 && this->inventory[indx] != NULL){

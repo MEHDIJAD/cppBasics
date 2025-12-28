@@ -1,14 +1,19 @@
 #include "../incl/Dog.hpp"
 #include "../incl/Animal.hpp"
 
-/* Default Costructor */
+/**
+ * @brief Default constructor for Dog.
+ */
 Dog::Dog( void ) : Animal(){
 	this->type = "Dog";
 	std::cout <<  BLUE <<  this->type << RESET << " Constructor called" << std::endl; 
 	this->attr = new (Brain); /* Allocates memory */
 }
 
-/* Copy Costructor */
+/**
+ * @brief Copy constructor for Dog.
+ * @param other The other Dog object to copy.
+ */
 Dog::Dog(const Dog &other) : Animal(other){
 
 	std::cout <<  BLUE <<  this->type << RESET << " Copy Costructor called ⮞ Deep Copy created✔️" << std::endl; 
@@ -19,7 +24,11 @@ Dog::Dog(const Dog &other) : Animal(other){
     //    to the Brain copy constructor you wrote earlier.
 }
 
-/* Assigment Operator */
+/**
+ * @brief Assignment operator for Dog.
+ * @param other The other Dog object to assign from.
+ * @return A reference to the current Dog object.
+ */
 Dog &Dog::operator=(const Dog &other){
 	std::cout <<  BLUE <<  this->type << RESET << " Assigment Operator called ⮞ Deep Copy created✔️" << std::endl; 
 	if(this != &other){
@@ -35,14 +44,18 @@ Dog &Dog::operator=(const Dog &other){
 	return (*this);
 }
 
-/* Destructor */
+/**
+ * @brief Destructor for Dog.
+ */
 Dog::~Dog ( void ){
 	std::cout <<  BLUE <<  "Dog " << RESET << "Destructor called" << std::endl;	
 	delete  this->attr; /* Clean UP */
 }
 
+/**
+ * @brief Makes the dog sound.
+ */
 void Dog::makeSound( void ) const 
 {
 	std::cout << BLUE << "Dog Say BARK BARK🐶🐶" << std::endl;	
 }
-
