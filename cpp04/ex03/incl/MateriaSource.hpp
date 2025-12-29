@@ -5,6 +5,7 @@
 #include "IMateriaSource.hpp"
 
 #define GRAY  "\033[90m"
+#define RED "\033[91m"
 
 class MateriaSource : public IMateriaSource
 {

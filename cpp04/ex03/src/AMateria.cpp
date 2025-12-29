@@ -15,7 +15,7 @@ AMateria::AMateria( void ) : type(""){
 AMateria::AMateria(std::string const &type) : type(type)
 {
     std::cout << MAGENTA << "AMateria " << RESET << this->type
-    << " Constructor called" << std.endl;
+    << " Constructor called" << std::endl;
 }
 
 /**
@@ -43,7 +43,17 @@ AMateria::AMateria(const AMateria &other){
  */
 AMateria &AMateria::operator=(const AMateria &other)
 {
-    (void)other; // While assigning a Materia to another, copying the type doesn't make sense
+    /*! @note While assigning a Materia to another, 
+    copying the type doesn't make sense
+
+    Logic: An Ice object is defined by its class code. 
+    If you assign a Cure materia to it and copy the type string "cure", 
+    you end up with a broken object:
+    It is an instance of class Ice.
+    But its type string says "cure".
+    Result: A logical monster.
+    */
+    (void)other;
     return (*this);
 }
 

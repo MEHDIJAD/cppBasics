@@ -4,6 +4,7 @@
 #include "ICharacter.hpp"
 
 #define YELLOW  "\033[33m"
+#define RED "\033[91m"
 
 class Character : public ICharacter
 {

@@ -8,7 +8,6 @@ MateriaSource::MateriaSource( void )
 	for (size_t i = 0; i < 4; i++){
 		this->learnInventory[i] = NULL; // (emplty)
 	}
-	
 	std::cout << GRAY <<  "MateriaSource" << RESET
 	<< " Constructor called" << std::endl;
 }
@@ -96,7 +95,7 @@ void MateriaSource::learnMateria(AMateria *lsrc)
 			return;
 		}
 	}
-	std::cout << "Did not find empty SLOT !" << std::endl;
+	std::cerr << RED << "Did not find empty SLOT !" << std::endl;
 	delete lsrc; 
 	/*!  @brief learnMateria takes ownership. 
 	if We reject the item, it might never get deleted (memory leak).

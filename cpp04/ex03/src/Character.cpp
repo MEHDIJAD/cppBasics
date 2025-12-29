@@ -1,13 +1,24 @@
 #include "../incl/Character.hpp"
 
 /**
+ * @brief Default constructor.
+ */
+Character::Character( void ) : Name("Unnamed")
+{
+    for (size_t i = 0; i < 4; i++){ /*! @note empty upon construction */
+        this->inventory[i] = NULL;
+    }
+    std::cout << YELLOW << "Character Default Constructor called" << RESET << std::endl;
+}
+
+/**
  * @brief Constructs a Character object with a given name.
  * @param name The name of the character.
  */
 Character::Character(std::string const &name) : Name(name)
 {
     for (size_t i = 0; i < 4; i++){
-        this->inventory[i] = NULL; // (empty)
+        this->inventory[i] = NULL; /*! @note empty upon construction */
     }
     std::cout << YELLOW << "Character " << RESET << this->Name
     << " Constructor called" << std::endl;
@@ -28,7 +39,7 @@ Character::Character(const Character &other)
             this->inventory[i] = NULL;
         }
     }
-    std::cout << YELLOW << "Character" << RESET << this->Name
+    std::cout << YELLOW << "Character " << RESET << this->Name
     << " Deep Copy Constructor called" << std::endl;
 }
 
@@ -67,6 +78,8 @@ Character &Character::operator=(const Character &other)
  */
 Character::~Character( void )
 {
+    /*! @note (from subject):
+    Of course, the Materias must be deleted when a Character is destroyed.*/
     for (size_t i = 0; i < 4; i++){
         if (this->inventory[i] != NULL){
             delete this->inventory[i];
@@ -103,13 +116,18 @@ void Character::equip(AMateria *m)
 			return ;
 		}
 	}
-	std::cout << "Inventory is full. Could not equip "
+	std::cerr << RED << "Inventory is full. Could not equip "
 	<< m->getType() << std::endl;
 	delete m;
 	/*! @brief We need delete m in equip because if the inventory is full, 
 	the AMateria* m (which was dynamically allocated with new) cannot be stored. 
 	If it's not deleted, the pointer to that memory is lost, resulting in a memory leak.
 
+    If equip rejects it and doesn't delete it, that object leaks immediately.
+
+    If you changed it to "Caller Responsibility," 
+    We would have to change the return type of equip from void to bool (to tell the caller it failed). 
+    Since the subject mandates void equip(AMateria* m), we must delete it inside,
 	*/
 }
 
@@ -119,9 +137,10 @@ void Character::equip(AMateria *m)
  */
 void Character::unequip(int idx){
 	if (idx >= 0 && idx < 4 && this->inventory[idx] != NULL) {
-        // Just remove it from the inventory. 
-        // DO NOT DELETE IT HERE.
-        this->inventory[idx] = NULL; 
+        /*! @note (From subject):
+        The unequip() member function must NOT delete the Materia!
+        */
+        this->inventory[idx] = NULL;
         std::cout << "Unequipped slot " << idx << std::endl;
     }
 	
