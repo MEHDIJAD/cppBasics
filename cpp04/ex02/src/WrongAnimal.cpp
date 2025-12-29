@@ -57,7 +57,7 @@ WrongAnimal::~WrongAnimal(void)
  * @brief Returns the type of the wrong animal.
  * @return The type of the wrong animal.
  */
-std::string WrongAnimal::getType(void) const
+std::string const &WrongAnimal::getType(void) const
 {
     return (this->type);
 }

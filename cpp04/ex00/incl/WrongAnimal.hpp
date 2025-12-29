@@ -19,7 +19,7 @@ private:
     WrongAnimal(std::string &type);
     WrongAnimal(const WrongAnimal &other);
     WrongAnimal &operator=(const WrongAnimal &other);
-	~WrongAnimal();
+	~WrongAnimal(); /*! @note Should be virtual but We keep it like this to make a point*/
 
     std::string getType(void) const;
 

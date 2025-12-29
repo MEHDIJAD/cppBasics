@@ -41,6 +41,7 @@ Cure::~Cure( void ){
 /**
  * @brief Clones the Cure object.
  * @return A pointer to the cloned Cure object.
+ * @note The caller takes ownership of the returned pointer and is responsible for deleting it.
  */
 AMateria *Cure::clone() const {
     return new Cure(*this);

@@ -59,3 +59,11 @@ void Dog::makeSound( void ) const
 {
 	std::cout << BLUE << "Dog Say BARK BARK🐶🐶" << std::endl;	
 }
+
+void Dog::setIdea(int i, std::string idea) {
+    this->attr->setIdea(i, idea); // Assumes you added setIdea to Brain
+}
+
+std::string Dog::getIdea(int i) const {
+    return this->attr->getIdea(i); // Assumes you added getIdea to Brain
+}

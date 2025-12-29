@@ -31,7 +31,7 @@ class Animal
     */
     virtual ~Animal();
 
-    std::string getType(void) const;
+    std::string const &getType(void) const;
 
     /**
     * @brief Prints the specific sound of the animal.

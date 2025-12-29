@@ -4,9 +4,9 @@
  * @brief Default constructor for Cat.
  */
 Cat::Cat( void ) : Animal() {
-	this->attr = new Brain();
 	this->type = "Cat";
 	std::cout <<  GREEN <<  this->type << RESET << " Constructor called" << std::endl; 
+	this->attr = new Brain();
 }
 
 /**

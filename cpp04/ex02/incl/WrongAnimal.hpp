@@ -21,7 +21,7 @@ private:
     WrongAnimal &operator=(const WrongAnimal &other);
 	~WrongAnimal();
 
-    std::string getType(void) const;
+    std::string const &getType(void) const;
 
     void makeSound(void) const ;
 };

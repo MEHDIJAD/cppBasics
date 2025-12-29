@@ -7,17 +7,27 @@
 #define GREEN   "\033[32m"
 #define RESET   "\033[0m"
 
-int main(void)
+void Test1(void)
 {
+	// =========================================================================
+    // TEST 1: SUBJECT TESTS (Basic Polymorphism)
+    // =========================================================================
+    std::cout << BLUE << "=== TEST 1: SUBJECT TESTS ===" << RESET << std::endl;
+
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
+
 	delete j;//should not create a leak
 	delete i;
+	std::cout << std::endl;
+}
 
+void Test2(void)
+{
 	// ========================================================================
-    // TEST 1: The Subject Requirement (Array of Animals)
+    // TEST 2: The Subject Requirement (Array of Animals)
     // ========================================================================
-    std::cout << GREEN << "\n\n--- TEST 1: ARRAY OF ANIMALS ---" << RESET << std::endl;
+    std::cout << BLUE << "\n\n=== TEST 2: ARRAY OF ANIMALS ===" << RESET << std::endl;
 
 	const int arraySize = 4;
 	const Animal *animals[arraySize];
@@ -29,39 +39,75 @@ int main(void)
 		animals[i] = new Cat();
 	}
 
-	std::cout << "\n" << RED << "--- DELETING ARRAY ---" << RESET << std::endl;
+	std::cout << "\n" << RED << "=== DELETING ARRAY ===" << RESET << std::endl;
 
 	for (int i = 0; i < arraySize; i++){
 		delete animals[i];
 	}
+	std::cout << std::endl;
+}
 
-	// ========================================================================
-    // TEST 2.0: Deep Copy Proof (Copy Constructor)
+void Test3(void)
+{
     // ========================================================================
-    std::cout << "\n" << GREEN << "--- TEST 2: DEEP COPY (CONSTRUCTOR) ---" << RESET << std::endl;
+    // TEST 3: Deep Copy Proof (Copy Constructor)
+    // ========================================================================
+    std::cout << "\n" << BLUE << "=== TEST 3: DEEP COPY (CONSTRUCTOR) ===" << RESET << std::endl;
 
-	Dog *original = new Dog();
-	std::cout  << GREEN << "original Created\n\n";
-	
-	Dog *copy = new Dog (*original);
-	std::cout << GRAY << "Copy created (Should have its OWN Brain).\n\n";
-	
-	std::cout << RED << "Deleting Original..." << std::endl;
+    Dog *original = new Dog();
+    original->setIdea(0, "I want to chase the ball!"); // 1. Set specific idea
+    
+    std::cout << BLUE << "Original Idea: " << original->getIdea(0) << RESET << std::endl;
+    
+    Dog *copy = new Dog(*original); // 2. Create copy
+    std::cout << GRAY << "Copy created.\n" << RESET;
+
+    // 3. CHANGE Original's idea
+    original->setIdea(0, "Actually, I want to sleep...");
+    std::cout << BLUE << "Original Idea Changed to: " << original->getIdea(0) << RESET << std::endl;
+
+    // 4. VERIFY Copy (Should remain "chase the ball")
+    std::cout << GREEN << "Copy's Idea (Should be 'chase the ball'): " << copy->getIdea(0) << RESET << std::endl;
+
+    if (copy->getIdea(0) != original->getIdea(0))
+        std::cout << GREEN << "SUCCESS: Deep Copy confirmed!" << RESET << std::endl;
+    else
+        std::cout << RED << "FAILED: Shallow Copy detected!" << RESET << std::endl;
+
     delete original; 
-
-	std::cout << RED << "\n\nDeleting Copy..." << std::endl;
     delete copy; 
+}
 
-	// ========================================================================
-    // TEST 3: Assignment Operator (Brain Transplant)
+void Test4(void)
+{
     // ========================================================================
-    std::cout << "\n" << GREEN << "--- TEST 3: ASSIGNMENT OPERATOR ---" << RESET << std::endl;
+    // TEST 4: Assignment Operator (Brain Transplant)
+    // ========================================================================
+    std::cout << "\n" << BLUE << "=== TEST 4: ASSIGNMENT OPERATOR ===" << RESET << std::endl;
 
-	Dog dogA;
+    Dog dogA;
     Dog dogB;
 
-    std::cout  << GREEN << "\n\nAssigning B = A...\n" << std::endl;
-    dogB = dogA;
+    dogA.setIdea(0, "Hungry for bone");
+    dogB.setIdea(0, "Empty head");
+
+    std::cout << BLUE << "\nAssigning B = A...\n\n" << RESET;
+    dogB = dogA; // Assignment happens here
+
+    // Change A again
+    dogA.setIdea(0, "Full now");
+
+    // Check B
+    std::cout << "DogA Idea: " << dogA.getIdea(0) << std::endl;
+    std::cout << "DogB Idea: " << dogB.getIdea(0) << " (Should still be 'Hungry for bone')" << std::endl;
+}
+
+int main(void)
+{
+	Test1();
+	Test2();
+	Test3();
+	Test4();
 
 	return 0;
 }

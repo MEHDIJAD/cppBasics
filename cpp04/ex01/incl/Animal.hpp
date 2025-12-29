@@ -32,7 +32,11 @@ class Animal
     */
     virtual ~Animal();
 
-    std::string getType(void) const;
+     /*! @brief It returns a "read-only link" to the actual variable stored inside the class. 
+    No copying happens. 
+    It is instant and free, regardless of how long the string is.
+    */
+    std::string const &getType(void) const;
 
     /**
     * @brief Prints the specific sound of the animal.

@@ -6,7 +6,7 @@
 Animal::Animal(void) : type("")
 {
     std::cout << YELLOW << "Animal " << RESET << "Constructor called"
-              << std::endl;
+    << std::endl;
 }
 
 /**
@@ -16,7 +16,7 @@ Animal::Animal(void) : type("")
 Animal::Animal(std::string &type) : type(type)
 {
     std::cout << YELLOW << "Animal " << this->type << RESET
-              << " Constructor called" << std::endl;
+    << " Constructor called" << std::endl;
 }
 
 /**
@@ -27,7 +27,7 @@ Animal::Animal(const Animal &other)
 {
     this->type = other.type;
     std::cout << YELLOW << "Animal " << this->type << RESET
-              << " Copy Constructor called" << std::endl;
+     << " Copy Constructor called" << std::endl;
 }
 
 /**
@@ -49,14 +49,14 @@ Animal &Animal::operator=(const Animal &other)
 Animal::~Animal(void)
 {
     std::cout << YELLOW << "Animal " << this->type << RESET
-              << " Destructor called" << std::endl;
+    << " Destructor called" << std::endl;
 }
 
 /**
  * @brief Returns the type of the animal.
  * @return The type of the animal.
  */
-std::string Animal::getType(void) const
+std::string const &Animal::getType(void) const
 {
     return (this->type);
 }

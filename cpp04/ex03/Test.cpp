@@ -3,7 +3,7 @@
 #include "incl/Cure.hpp"
 #include "incl/Character.hpp"
 
-void Test01(void ){
+void Test1(void ){
 	Ice i;
     std::cout << std::endl;
     Cure j;

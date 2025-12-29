@@ -3,10 +3,10 @@
 /**
  * @brief Default constructor for WrongAnimal.
  */
-WrongAnimal::WrongAnimal(void)
+WrongAnimal::WrongAnimal(void) : type("")
 {
     std::cout << YELLOW << "WrongAnimal " << RESET << "Constructor called"
-              << std::endl;
+    << std::endl;
 }
 
 /**
@@ -27,7 +27,7 @@ WrongAnimal::WrongAnimal(const WrongAnimal &other)
 {
     this->type = other.type;
     std::cout << YELLOW << "WrongAnimal " << this->type << RESET
-              << " Copy Constructor called" << std::endl;
+    << " Copy Constructor called" << std::endl;
 }
 
 /**
@@ -37,8 +37,7 @@ WrongAnimal::WrongAnimal(const WrongAnimal &other)
  */
 WrongAnimal &WrongAnimal::operator=(const WrongAnimal &other)
 {
-    if (this != &other)
-    {
+    if (this != &other){
         this->type = other.type;
     }
     return (*this);

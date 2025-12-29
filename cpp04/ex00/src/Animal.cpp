@@ -6,7 +6,7 @@
 Animal::Animal(void) : type("")
 {
     std::cout << YELLOW << "Animal " << RESET << "Constructor called"
-              << std::endl;
+    << std::endl;
 }
 
 /**
@@ -56,7 +56,7 @@ Animal::~Animal(void)
  * @brief Returns the type of the animal.
  * @return The type of the animal.
  */
-std::string Animal::getType(void) const
+std::string const &Animal::getType(void) const
 {
     return (this->type);
 }
